@@ -4,18 +4,9 @@
  */
 package signin;
 
-import com.mysql.cj.xdevapi.Statement;
-import com.sun.jdi.connect.spi.Connection;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-
+import java.util.Base64;
+import java.util.Base64.Encoder;
 /**
  *
  * @author NILUPUL UDARA
@@ -27,6 +18,7 @@ public class Signup extends javax.swing.JFrame {
      */
     public Signup() {
         initComponents();
+        
     }
 
     /**
@@ -38,31 +30,45 @@ public class Signup extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        jlast_name = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        jusername = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jusername1 = new javax.swing.JTextField();
         jsign_up = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
+        jpassword2 = new javax.swing.JPasswordField();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jfirstname = new javax.swing.JTextField();
+        jlastname = new javax.swing.JTextField();
+        jusername1 = new javax.swing.JTextField();
         jpassword1 = new javax.swing.JPasswordField();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jlast_name.setBackground(new java.awt.Color(255, 51, 0));
+        jlast_name.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(102, 255, 102)));
+        jlast_name.setForeground(new java.awt.Color(255, 255, 255));
+        jlast_name.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 48)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Sign Up");
+        jlast_name.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 40, -1, -1));
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 30)); // NOI18N
-        jLabel1.setText("Username");
+        jusername.setFont(new java.awt.Font("Segoe UI", 0, 30)); // NOI18N
+        jusername.setForeground(new java.awt.Color(255, 255, 255));
+        jusername.setText("Username");
+        jlast_name.add(jusername, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 210, 140, -1));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 30)); // NOI18N
-        jLabel2.setText("Password");
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("Retype Pass");
+        jlast_name.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(37, 320, 160, -1));
 
-        jusername1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-
-        jsign_up.setBackground(new java.awt.Color(204, 204, 204));
+        jsign_up.setBackground(new java.awt.Color(153, 153, 153));
         jsign_up.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jsign_up.setText("Sign Up");
         jsign_up.addActionListener(new java.awt.event.ActionListener() {
@@ -70,8 +76,10 @@ public class Signup extends javax.swing.JFrame {
                 jsign_upActionPerformed(evt);
             }
         });
+        jlast_name.add(jsign_up, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 400, 140, 40));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("I have an account sign in");
         jLabel4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -79,138 +87,145 @@ public class Signup extends javax.swing.JFrame {
                 jLabel4MouseClicked(evt);
             }
         });
+        jlast_name.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 450, -1, -1));
+
+        jpassword2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jlast_name.add(jpassword2, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 320, 240, 47));
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 30)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setText("First Name");
+        jlast_name.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(42, 110, 150, -1));
+
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 30)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setText("Last Name");
+        jlast_name.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(39, 160, 150, -1));
+
+        jfirstname.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jfirstname.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jfirstnameActionPerformed(evt);
+            }
+        });
+        jlast_name.add(jfirstname, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 110, 240, 41));
+
+        jlastname.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jlastname.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jlastnameActionPerformed(evt);
+            }
+        });
+        jlast_name.add(jlastname, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 160, 240, 41));
+
+        jusername1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jusername1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jusername1ActionPerformed(evt);
+            }
+        });
+        jlast_name.add(jusername1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 210, 240, 41));
 
         jpassword1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jlast_name.add(jpassword1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 260, 240, 47));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                        .addGap(146, 146, 146)
-                        .addComponent(jLabel3)
-                        .addGap(0, 126, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                        .addGap(42, 42, 42)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jpassword1))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jusername1))
-                            .addComponent(jsign_up, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel4)))
-                .addGap(42, 42, 42))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(18, Short.MAX_VALUE)
-                .addComponent(jLabel3)
-                .addGap(40, 40, 40)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jusername1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel2)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jpassword1, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(4, 4, 4)))
-                .addGap(29, 29, 29)
-                .addComponent(jsign_up, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29)
-                .addComponent(jLabel4)
-                .addGap(12, 12, 12))
-        );
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 30)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setText("Password");
+        jlast_name.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(37, 260, 160, -1));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\NILUPUL UDARA\\Pictures\\background-learner.jpg")); // NOI18N
+        jLabel1.setText("jLabel1");
+        jlast_name.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 450, 500));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jlast_name, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jlast_name, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jsign_upActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jsign_upActionPerformed
-        // TODO add your handling code here:
-        String username = jusername1.getText();
-        String password = jpassword1.getText();
-   
-       /* String password;
-        password = md5(jpassword1.getText());*/
-            
-        if(username.equals(""))
-        {
-            JOptionPane.showMessageDialog(null,"Add A Username");
-        }
-        else if(password.equals(""))
-        {
-            JOptionPane.showMessageDialog(null,"Add A Password");
-        }
-    
-        else{
-        try {    
-            java.sql.Statement s = Db.mycon().createStatement();
-           s.executeUpdate(" INSERT INTO users (username, password)"
-                   + "VALUES ('"+username+"', '"+password+"') ");
-       
-        JOptionPane.showMessageDialog(rootPane, "Your Account Created");
-        
-        this.setVisible(false);
-        new Signin().setVisible(true);
-        
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-        jusername1.setText("");
-        jpassword1.setText("");
-        }
-    }//GEN-LAST:event_jsign_upActionPerformed
-
- private  String md5(String c)
- {
-     try{
-     MessageDigest digs = MessageDigest.getInstance("MD5");
-     
-     digs.update(new String(c).getBytes("UTF6"));
-     
-     String str = new String (digs.digest());
-     
-     return str;
-     }
-     catch(Exception e)
-     {
-         return "";
-     }
- }    
-    
-    
-    
-    
     private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
         // signing form show:
-        
-       Signin si = new Signin();
-        si.setVisible(true); 
+
+        Signin si = new Signin();
+        si.setVisible(true);
         si.pack();
         si.setLocationRelativeTo(null);
         this.setVisible(false);
         new Signin().setVisible(true);
     }//GEN-LAST:event_jLabel4MouseClicked
+
+    private void jsign_upActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jsign_upActionPerformed
+        // TODO add your handling code here:
+        String username = jusername1.getText();
+        String first_name = jfirstname.getText();
+        String last_name = jlastname.getText();
+        String password = String.valueOf(jpassword1.getText());
+        String re_pass = String.valueOf(jpassword2.getText());
+        
+        if(username.equals(""))
+        {
+            JOptionPane.showMessageDialog(null,"Add A Username");
+        }
+        if(first_name.equals(""))
+        {
+            JOptionPane.showMessageDialog(null,"Add A First Name");
+        }
+        if(last_name.equals(""))
+        {
+            JOptionPane.showMessageDialog(null,"Add A Last Name");
+        }
+        if(password.equals(""))
+        {
+            JOptionPane.showMessageDialog(null,"Add A Password");
+        }
+        else if (!password.equals("re_pass"))
+        {
+            JOptionPane.showMessageDialog(null,"Re Type the Password Again");
+        }        
+        else{
+
+            Encoder encoder = Base64.getEncoder();
+            String pwrd =  encoder.encodeToString(password.getBytes());
+
+            try {
+                java.sql.Statement s = Db.mycon().createStatement();
+                s.executeUpdate(" INSERT INTO users (username,first_name,last_name,password)"
+                    + "VALUES ('"+username+"','"+first_name+"','"+last_name+"','"+pwrd+"') ");
+
+                JOptionPane.showMessageDialog(rootPane, "Your Account Created");
+
+                this.setVisible(false);
+                new Signin().setVisible(true);
+
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+            jusername1.setText("");
+            jpassword1.setText("");
+        }
+    }//GEN-LAST:event_jsign_upActionPerformed
+
+    private void jfirstnameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jfirstnameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jfirstnameActionPerformed
+
+    private void jlastnameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jlastnameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jlastnameActionPerformed
+
+    private void jusername1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jusername1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jusername1ActionPerformed
+
 
     /**
      * @param args the command line arguments
@@ -252,11 +267,19 @@ public class Signup extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JTextField jfirstname;
+    private javax.swing.JPanel jlast_name;
+    private javax.swing.JTextField jlastname;
     private javax.swing.JPasswordField jpassword1;
+    private javax.swing.JPasswordField jpassword2;
     private javax.swing.JButton jsign_up;
+    private javax.swing.JLabel jusername;
     private javax.swing.JTextField jusername1;
     // End of variables declaration//GEN-END:variables
+
 
     
 }

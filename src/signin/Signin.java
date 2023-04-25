@@ -4,14 +4,14 @@
  */
 package signin;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-
+import java.util.Base64;
+import java.util.Base64.Encoder;
 /**
  *
  * @author NILUPUL UDARA
@@ -26,6 +26,9 @@ public class Signin extends javax.swing.JFrame {
      */
     public Signin() {
         initComponents();
+        Toolkit toolkit = getToolkit();
+        Dimension size = toolkit.getScreenSize();
+        setLocation(size.width/2-getWidth()/2, size.height/2-getHeight()/2);
         
         con = Db.mycon();
     }
@@ -43,24 +46,38 @@ public class Signin extends javax.swing.JFrame {
         jsign_in_ = new javax.swing.JButton();
         jLabelsignup = new javax.swing.JLabel();
         jpassword = new javax.swing.JPasswordField();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBackground(new java.awt.Color(255, 51, 0));
         jPanel1.setForeground(new java.awt.Color(255, 255, 255));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jusername.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jusername.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jusernameKeyTyped(evt);
+            }
+        });
+        jPanel1.add(jusername, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 130, 245, 41));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 30)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Username");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, 155, -1));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 30)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Password");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 200, 155, -1));
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 48)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Sign In");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 30, -1, -1));
 
-        jsign_in_.setBackground(new java.awt.Color(204, 204, 204));
+        jsign_in_.setBackground(new java.awt.Color(153, 153, 153));
         jsign_in_.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jsign_in_.setText("Sign In");
         jsign_in_.addActionListener(new java.awt.event.ActionListener() {
@@ -68,8 +85,10 @@ public class Signin extends javax.swing.JFrame {
                 jsign_in_ActionPerformed(evt);
             }
         });
+        jPanel1.add(jsign_in_, new org.netbeans.lib.awtextra.AbsoluteConstraints(301, 255, 130, -1));
 
         jLabelsignup.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabelsignup.setForeground(new java.awt.Color(255, 255, 255));
         jLabelsignup.setText("I haven't an account sign up");
         jLabelsignup.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabelsignup.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -77,63 +96,26 @@ public class Signin extends javax.swing.JFrame {
                 jLabelsignupMouseClicked(evt);
             }
         });
+        jPanel1.add(jLabelsignup, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 310, -1, -1));
 
         jpassword.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jPanel1.add(jpassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 200, 245, 45));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(166, 166, 166)
-                .addComponent(jLabel3)
-                .addContainerGap(166, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jsign_in_, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabelsignup)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jusername, javax.swing.GroupLayout.DEFAULT_SIZE, 245, Short.MAX_VALUE)
-                            .addComponent(jpassword))))
-                .addGap(47, 47, 47))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addComponent(jLabel3)
-                .addGap(40, 40, 40)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(jusername, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel2)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jpassword, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(2, 2, 2)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
-                .addComponent(jsign_in_, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
-                .addComponent(jLabelsignup)
-                .addGap(24, 24, 24))
-        );
+        jLabel4.setIcon(new javax.swing.ImageIcon("C:\\Users\\NILUPUL UDARA\\Pictures\\background-learner.jpg")); // NOI18N
+        jLabel4.setText("jLabel4");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 480, 380));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -143,19 +125,31 @@ public class Signin extends javax.swing.JFrame {
         // TODO add your handling code here:
         String username = jusername.getText();
         String password = jpassword.getText();
-        
+        if(username.equals(""))
+        {
+            JOptionPane.showMessageDialog(null,"Add the Username");
+        }
+        else if(password.equals(""))
+        {
+            JOptionPane.showMessageDialog(null,"Add the Password");
+        }
+        else{  
+            
+            Encoder encoder = Base64.getEncoder();
+            String pw =  encoder.encodeToString(password.getBytes());
+            
         try {
         
             String sql = " SELECT * FROM users WHERE username = ? AND password = ? ";
             ps = con.prepareCall(sql);
             ps.setString(1, username);
-            ps.setString(2, password);
+            ps.setString(2, pw);
             
             rs = ps.executeQuery();
    
            
             if (rs.next()){
-                JOptionPane.showMessageDialog(rootPane, "Your signin....");
+                JOptionPane.showMessageDialog(rootPane, "You're signin....");
             }else    
             {
                 JOptionPane.showMessageDialog(rootPane, "Your signin failed");
@@ -163,7 +157,7 @@ public class Signin extends javax.swing.JFrame {
         } catch (Exception e) {
         }       
     }//GEN-LAST:event_jsign_in_ActionPerformed
-
+    }
     private void jLabelsignupMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelsignupMouseClicked
         // signing form show:
 
@@ -171,8 +165,12 @@ public class Signin extends javax.swing.JFrame {
         su.setVisible(true);
         su.pack();
         su.setLocationRelativeTo(null);
-        
+        this.setVisible(false);
     }//GEN-LAST:event_jLabelsignupMouseClicked
+
+    private void jusernameKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jusernameKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jusernameKeyTyped
 
     /**
      * @param args the command line arguments
@@ -213,6 +211,7 @@ public class Signin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabelsignup;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPasswordField jpassword;
